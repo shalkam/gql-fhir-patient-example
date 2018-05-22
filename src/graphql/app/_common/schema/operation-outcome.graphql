@@ -1,0 +1,51 @@
+enum OperationOutcomeIssueSeverity {
+  fatal
+  error
+  warning
+  information
+}
+# refer to https://www.hl7.org/fhir/valueset-issue-type.html for more details
+enum OperationOutcomeIssueCode {
+  # Content invalid against the specification or a profile.
+  invalid
+  # A structural issue in the content such as wrong namespace, or unable to parse the content completely, or invalid json syntax.
+  structure
+  required
+  value
+  invariant
+  security
+  login
+  unknown
+  expired
+  forbidden
+  suppressed
+  processing
+  not_supported
+  duplicate
+  not_found
+  too_long
+  code_invalid
+  extension
+  too_costly
+  business_rule
+  conflict
+  incomplete
+  transient
+  lock_error
+  no_store
+  exception
+  timeout
+  throttled
+  informational
+}
+type OperationOutcomeIssue {
+  severity: OperationOutcomeIssueSeverity!
+  code: OperationOutcomeIssueCode!
+  details: CodeableConcept
+  diagnostics: String
+  location: [String]
+  expression: [String]
+}
+type OperationOutcome {
+  issue: [OperationOutcomeIssue]!
+}

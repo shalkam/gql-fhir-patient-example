@@ -1,0 +1,250 @@
+# FHIR GraphQL Schema. Version 3.1.0-12192
+type Patient {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  identifier: PatientIdentifier!
+  name: HumanName!
+  telecom: ContactPoint
+  gender: code  _gender: ElementBase
+  birthDate: date!  _birthDate: ElementBase
+  address: Address
+  communication: [PatientCommunication]
+}
+
+type PatientIdentifier {
+  id: String
+  extension: [Extension]
+  use: code  _use: ElementBase
+  type: CodeableConcept
+  system: uri!  _system: ElementBase
+  value: String!  _value: ElementBase
+  period: Period
+  assigner: Reference
+}
+
+input PatientIdentifierInput {
+  id: String
+  extension: [ExtensionInput]
+  use: code  _use: ElementBaseInput
+  type: CodeableConceptInput
+  system: uri  _system: ElementBaseInput
+  value: String!  _value: ElementBaseInput
+  period: PeriodInput
+  assigner: ReferenceInput
+}
+
+type PatientContact {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  relationship: [CodeableConcept]
+  name: HumanName
+  telecom: [ContactPoint]
+  address: Address
+  gender: code  _gender: ElementBase
+  organization: Reference
+  period: Period
+}
+
+type PatientAnimal {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  species: CodeableConcept!
+  breed: CodeableConcept
+  genderStatus: CodeableConcept
+}
+
+type PatientCommunication {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  language: CodeableConcept!
+  preferred: Boolean  _preferred: ElementBase
+}
+
+type PatientLink {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  otReference: Reference
+  type: code  _type: ElementBase
+}
+
+input PatientInput {
+  id: ID
+  meta: MetaInput
+  implicitRules: uri  _implicitRules: ElementBaseInput
+  language: code  _language: ElementBaseInput
+  text: NarrativeInput
+  contained: [ResourceInput]
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  identifier: PatientIdentifierInput!
+  name: HumanNameInput!
+  telecom: ContactPointInput
+  gender: code  _gender: ElementBaseInput
+  birthDate: date!  _birthDate: ElementBaseInput
+  address: AddressInput
+  communication: [PatientCommunicationInput]
+}
+
+input PatientContactInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  relationship: [CodeableConceptInput]
+  name: HumanNameInput
+  telecom: [ContactPointInput]
+  address: AddressInput
+  gender: code  _gender: ElementBaseInput
+  organization: ReferenceInput
+  period: PeriodInput
+}
+
+input PatientAnimalInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  species: CodeableConceptInput!
+  breed: CodeableConceptInput
+  genderStatus: CodeableConceptInput
+}
+
+input PatientCommunicationInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  language: CodeableConceptInput!
+  preferred: Boolean  _preferred: ElementBaseInput
+}
+
+input PatientLinkInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  otReference: ReferenceInput
+  type: code  _type: ElementBaseInput
+}
+
+type PatientConnection {
+  count : Int
+  offset : Int
+  pagesize : Int
+  first : ID
+  previous : ID
+  next : ID
+  last : ID
+  edges : [PatientEdge]
+}
+
+type PatientEdge {
+  mode : String
+  score : Float
+  resource : Patient
+}
+
+type PatientQuery {
+  connection(_filter : String
+    active : [token]
+    address : [String]
+    address_city : [String]
+    address_country : [String]
+    address_postalcode : [String]
+    address_state : [String]
+    address_use : [token]
+    animal_breed : [token]
+    animal_species : [token]
+    birthdate : [date]
+    death_date : [date]
+    deceased : [token]
+    email : [token]
+    family : [String]
+    gender : [token]
+    general_practitioner : [reference]
+    given : [String]
+    identifier : [token]
+    language : [token]
+    link : [reference]
+    name : [String]
+    organization : [reference]
+    phone : [token]
+    phonetic : [String]
+    telecom : [token]
+    _text : [String]
+    _content : [String]
+    _id : [token]
+    _lastUpdated : [date]
+    _profile : [uri]
+    _query : [token]
+    _security : [token]
+    _tag : [token]
+    _sort : String
+    _count : Int
+    _cursor : String) : PatientConnection
+  list(_filter : String
+    active : [token]
+    address : [String]
+    address_city : [String]
+    address_country : [String]
+    address_postalcode : [String]
+    address_state : [String]
+    address_use : [token]
+    animal_breed : [token]
+    animal_species : [token]
+    birthdate : [date]
+    death_date : [date]
+    deceased : [token]
+    email : [token]
+    family : [String]
+    gender : [token]
+    general_practitioner : [reference]
+    given : [String]
+    identifier : [token]
+    language : [token]
+    link : [reference]
+    name : [String]
+    organization : [reference]
+    phone : [token]
+    phonetic : [String]
+    telecom : [token]
+    _text : [String]
+    _content : [String]
+    _id : [token]
+    _lastUpdated : [date]
+    _profile : [uri]
+    _query : [token]
+    _security : [token]
+    _tag : [token]
+    _sort : String
+    _count : Int
+    _cursor : String) : [Patient]
+  read(id : ID!) : Patient
+}
+
+type PatientCreation {
+  location : String
+  resource : Patient
+  information : OperationOutcome
+}
+
+type PatientUpdate {
+  resource : Patient
+  information : OperationOutcome
+}
+
+type PatientDelete {
+  information : OperationOutcome
+}
+
+type PatientMutation {
+  delete(id : ID) : PatientDelete
+  update(id : ID,resource : PatientInput) : PatientUpdate
+  create(resource : PatientInput) : PatientCreation
+}
